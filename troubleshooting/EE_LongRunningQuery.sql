@@ -4,7 +4,7 @@
  ===================================================================================== */
 
 CREATE EVENT SESSION [Long-Running Queries] ON SERVER
-ADD EVENT sqlserver.rpc_completed (
+ADD EVENT sqlserver.rpc_completed ( -- end of procedures
     ACTION ( sqlserver.client_app_name, sqlserver.client_hostname,
     sqlserver.database_id, sqlserver.database_name, sqlserver.nt_username,
     sqlserver.query_hash, sqlserver.server_principal_name,
@@ -13,7 +13,7 @@ ADD EVENT sqlserver.rpc_completed (
               AND ( package0.equal_boolean(sqlserver.is_system, ( 0 )) ) )
             AND ( duration >= ( 20000000 ) )  -- equals 20 sec
           ) ),
-ADD EVENT sqlserver.sql_batch_completed (SET collect_batch_text = ( 1 )
+ADD EVENT sqlserver.sql_batch_completed (SET collect_batch_text = ( 1 ) -- end of T-SQL batch
     ACTION ( sqlserver.client_app_name, sqlserver.database_id,
     sqlserver.query_hash, sqlserver.session_id )
     WHERE ( ( ( package0.greater_than_uint64(sqlserver.database_id, ( 4 )) )
