@@ -9,7 +9,7 @@ ADD EVENT sqlserver.rpc_completed ( -- end of procedures
     sqlserver.database_id, sqlserver.database_name, sqlserver.nt_username,
     sqlserver.query_hash, sqlserver.server_principal_name,
     sqlserver.session_id, sqlserver.sql_text )
-    WHERE ( ( ( package0.greater_than_uint64(sqlserver.database_id, ( 4 )) )
+    WHERE ( ( ( package0.greater_than_uint64(sqlserver.database_id, ( 4 )) ) -- change database_id
               AND ( package0.equal_boolean(sqlserver.is_system, ( 0 )) ) )
             AND ( duration >= ( 20000000 ) )  -- equals 20 sec
           ) ),
