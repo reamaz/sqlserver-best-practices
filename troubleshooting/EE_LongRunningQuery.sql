@@ -16,7 +16,7 @@ ADD EVENT sqlserver.rpc_completed ( -- end of procedures
 ADD EVENT sqlserver.sql_batch_completed (SET collect_batch_text = ( 1 ) -- end of T-SQL batch
     ACTION ( sqlserver.client_app_name, sqlserver.database_id,
     sqlserver.query_hash, sqlserver.session_id )
-    WHERE ( ( ( package0.greater_than_uint64(sqlserver.database_id, ( 4 )) )
+    WHERE ( ( ( package0.greater_than_uint64(sqlserver.database_id, ( 4 )) ) -- change database_id
               AND ( package0.equal_boolean(sqlserver.is_system, ( 0 )) ) )
             AND ( duration >= ( 20000000 ) )  -- equals 20 sec
           ) )
@@ -32,5 +32,5 @@ WITH ( MAX_MEMORY = 4096 KB
       , TRACK_CAUSALITY = ON
       , STARTUP_STATE = ON );
 GO
-ALTER EVENT SESSION [Long-Running Queries] ON SERVER STATE=START;
-GO 
+--ALTER EVENT SESSION [Long-Running Queries] ON SERVER STATE=START;  -- enable on start?
+--GO 
