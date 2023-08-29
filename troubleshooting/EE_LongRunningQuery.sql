@@ -30,7 +30,7 @@ WITH ( MAX_MEMORY = 4096 KB
       , MAX_EVENT_SIZE = 0 KB
       , MEMORY_PARTITION_MODE = NONE
       , TRACK_CAUSALITY = ON
-      , STARTUP_STATE = ON );
+      , STARTUP_STATE = OFF );  -- start on server startup ?
 GO
---ALTER EVENT SESSION [Long-Running Queries] ON SERVER STATE=START;  -- enable on start?
---GO 
+ALTER EVENT SESSION [Long-Running Queries] ON SERVER STATE=START;  -- start?
+GO 
